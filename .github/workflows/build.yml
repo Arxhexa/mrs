@@ -27,6 +27,9 @@ jobs:
       run: |
         ./gfwlist2dnsmasq.sh -l -o gfwlist.list
         sed -i 's/^/+./' gfwlist.list
+
+    - name: Get cloudflare ipv4 address
+      run: curl -sSL https://www.cloudflare-cn.com/ips-v4 -o cloudflare.list
       
     - name: Download pre-release mihomo
       run: |
@@ -38,6 +41,7 @@ jobs:
       run: |
         chmod +x mihomo
         ./mihomo convert-ruleset domain text gfwlist.list gfwlist.mrs
+        ./mihomo convert-ruleset ipcidr text cloudflare.list cloudflare.mrs
 
     - name: Set up Git
       run: |
@@ -48,5 +52,6 @@ jobs:
       run: |
         git checkout -b gfwlist
         git add gfwlist.mrs
+        git add cloudflare.mrs
         git commit -m "Update processed file"
         git push -f origin gfwlist
