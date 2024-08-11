@@ -23,8 +23,10 @@ jobs:
     - name: Make the script executable
       run: chmod +x gfwlist2dnsmasq.sh
 
-    - name: Run the shell script
-      run: ./gfwlist2dnsmasq.sh -l -o gfwlist.list
+    - name: Get the gfwlist
+      run: |
+        ./gfwlist2dnsmasq.sh -l -o gfwlist.list
+        sed -i 's/^/+./' gfwlist.list
       
     - name: Download pre-release mihomo
       run: |
