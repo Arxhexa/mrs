@@ -41,6 +41,7 @@ jobs:
         git config user.email github-actions@github.com
 
     - name: Commit and push
+      run: |
         git checkout -b gfwlist
         git add gfwlist.mrs
         git commit -m "Update processed file"
