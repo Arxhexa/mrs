@@ -50,8 +50,8 @@ jobs:
 
     - name: Commit and push
       run: |
-        git checkout -b gfwlist
+        git checkout -b mrs
         git add gfwlist.mrs
         git add cloudflare.mrs
         git commit -m "Update processed file"
-        git push -f origin gfwlist
+        git push -f origin mrs
